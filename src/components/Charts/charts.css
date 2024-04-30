@@ -1,0 +1,11 @@
+.lineChart{
+    width: 75%;
+}
+
+.lineChart canvas{
+    width: 100%;
+}
+
+.pieChart{
+    width: 25%;
+}
