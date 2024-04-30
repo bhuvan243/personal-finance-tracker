@@ -1,35 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Cards from "../../components/Cards";
-import { Modal } from "antd";
 import AddExpenseModal from "../../components/Modals/AddExpense";
 import AddIncomeModal from "../../components/Modals/AddIncome";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../../firebase";
 import { addDoc, collection, getDocs, query } from "firebase/firestore";
 import { toast } from "react-toastify";
-import moment from "moment";
 import TransactionsTable from "../../components/TransactionsTable";
 import ChartComponent from "../../components/Charts";
 import NoTransactions from "../../components/NoTransactions";
 
 const Dashboard = () => {
-  // const transaction = [
-  //   {
-  //     type: "income",
-  //     amount : 1200,
-  //     tag: "salary",
-  //     name: "income 1",
-  //     date: "2023-05-23"
-  //   },
-  //   {
-  //     type: "expense",
-  //     amount : 800,
-  //     tag: "food",
-  //     name: "expense 1",
-  //     date: "2023-05-23"
-  //   },
-  // ]
   const [user] = useAuthState(auth);
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -57,7 +39,7 @@ const Dashboard = () => {
   function onFinish(values, type) {
     const newTransaction = {
       type: type,
-      date: values.date.format("DD/MM/YYYY"),
+      date: values.date.format("YYYY-MM-DD"),
       amount: parseFloat(values.amount),
       tag: values.tag,
       name: values.name,

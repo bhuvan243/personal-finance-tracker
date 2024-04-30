@@ -24,10 +24,6 @@ const SignupSigninComponent = () => {
 
   function signupWithEmail() {
     setLoading(true);
-    console.log("Name: " + name);
-    console.log("Email: " + email);
-    console.log("Password: " + password);
-    console.log("Confirm Password: " + confirmPassword);
     // authenticate the user, create new account usin email &b password
     if (
       name !== "" &&
@@ -42,7 +38,6 @@ const SignupSigninComponent = () => {
             const user = userCredential.user;
             toast.success("User created successfully");
             setLoading(false);
-            console.log("User>>>", user);
             setName("");
             setEmail("");
             setPassword("");
@@ -93,7 +88,7 @@ const SignupSigninComponent = () => {
       }
     } else {
       setLoading(false);
-    //   toast.error("Doc already exists");
+      //   toast.error("Doc already exists");
     }
   }
   // Login user with email and password
@@ -125,37 +120,37 @@ const SignupSigninComponent = () => {
   // sign-in with Google Pop-up
   function googleAuth() {
     setLoading(true);
-    try{
-        signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        console.log(user);
-        toast.success("User authenticated");
-        createDoc(user);
-        navigate("/dashboard");
-        setLoading(false);
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        toast.error(errorMessage);
-        setLoading(false);
-        // ...
-      });
+    try {
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          // This gives you a Google Access Token. You can use it to access the Google API.
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+          const token = credential.accessToken;
+          // The signed-in user info.
+          const user = result.user;
+          console.log(user);
+          toast.success("User authenticated");
+          createDoc(user);
+          navigate("/dashboard");
+          setLoading(false);
+          // IdP data available using getAdditionalUserInfo(result)
+          // ...
+        })
+        .catch((error) => {
+          // Handle Errors here.
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // The email of the user's account used.
+          const email = error.customData.email;
+          // The AuthCredential type that was used.
+          const credential = GoogleAuthProvider.credentialFromError(error);
+          toast.error(errorMessage);
+          setLoading(false);
+          // ...
+        });
     } catch (error) {
-        setLoading(false);
-        toast.error(error.message);
+      setLoading(false);
+      toast.error(error.message);
     }
   }
 
@@ -200,7 +195,8 @@ const SignupSigninComponent = () => {
                 className={styles.pLogin}
                 onClick={() => setIsLoggedIn((prev) => !prev)}
               >
-                Or Don't Have An Account? Click Here
+                Or Don't Have An Account?{" "}
+                <span style={{ color: "blue", fontWeight: "500" }}>Click Here</span>
               </p>
             </form>
           </div>
@@ -261,7 +257,7 @@ const SignupSigninComponent = () => {
                 className={styles.pLogin}
                 onClick={() => setIsLoggedIn((prev) => !prev)}
               >
-                Or Have An Account? Click Here
+                Or Have An Account? <span style={{ color: "blue", fontWeight: "500" }}>Click Here</span>
               </p>
             </form>
           </div>

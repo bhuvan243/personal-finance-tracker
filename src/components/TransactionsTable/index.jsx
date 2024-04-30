@@ -52,7 +52,8 @@ const TransactionsTable = ({
   );
 
   const sortedTransactions = filteredTransactions.sort((a, b) => {
-    if (sortKey === "date") {
+    if (sortKey == "date") {
+      console.log(new Date(a.date) - new Date(b.date));
       return new Date(a.date) - new Date(b.date);
     } else if (sortKey === "amount") {
       return a.amount - b.amount;
